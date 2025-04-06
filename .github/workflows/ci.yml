@@ -3,12 +3,12 @@ name: Node.js CI
 
 # Triggers: when to run the workflow
 on:
-  # Run on push events targeting the main branch
+  # Run on push events targeting the master branch
   push:
-    branches: ["main"]
-  # Run on pull request events targeting the main branch
+    branches: ["master"]
+  # Run on pull request events targeting the master branch
   pull_request:
-    branches: ["main"]
+    branches: ["master"]
 
 # Jobs to be executed
 jobs:
