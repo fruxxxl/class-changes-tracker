@@ -1,0 +1,58 @@
+# Workflow name displayed on the GitHub Actions tab
+name: Node.js CI
+
+# Triggers: when to run the workflow
+on:
+  # Run on push events targeting the main branch
+  push:
+    branches: ["main"]
+  # Run on pull request events targeting the main branch
+  pull_request:
+    branches: ["main"]
+
+# Jobs to be executed
+jobs:
+  # Job name (can be anything)
+  build-and-test:
+    # The type of runner that the job will run on (latest Ubuntu)
+    runs-on: ubuntu-latest
+
+    # Strategy: allows running tests on different Node.js versions
+    strategy:
+      matrix:
+        # Specify the Node.js versions you want to test on
+        # LTS (Long Term Support) versions are recommended
+        node-version: [18.x, 20.x]
+        # See available versions: https://nodejs.org/en/about/releases/
+
+    # Steps to perform within the job
+    steps:
+      # 1. Check out the repository code
+      # Uses the standard GitHub action to get the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      # Uses the standard action to install the specified Node.js version
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          # Use npm caching to speed up dependency installation
+          cache: "npm"
+
+      # 3. Install dependencies
+      # Use 'npm ci' instead of 'npm install' for faster and more reliable installs
+      # based on package-lock.json
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Run tests
+      # Executes the 'npm test' command defined in your package.json
+      - name: Run tests
+        run: npm run test
+
+    # 5. (Optional) Build the project if tests depend on the build output
+    # Uncomment if your tests require a prior build step
+    # - name: Build project
+    #   run: npm run build
