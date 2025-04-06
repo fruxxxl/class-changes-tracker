@@ -42,28 +42,22 @@ jobs:
           cache: "npm"
 
       # 3. Install dependencies
-      # Use 'npm ci' instead of 'npm install' for faster and more reliable installs
-      # based on package-lock.json
       - name: Install dependencies
         run: npm ci
 
-      # 4. Run tests and collect coverage
-      # Use the test:coverage script
-      - name: Run tests with coverage
-        run: npm run test:coverage
-
-      # 5. Upload coverage reports to Codecov
-      # Use the official Codecov Action
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          # Optional for public repositories using standard report filenames (coverage/lcov.info etc)
-          # token: ${{ secrets.CODECOV_TOKEN }} # Add CODECOV_TOKEN secret in repo settings if needed
-          fail_ci_if_error: true # Fail CI if upload fails
-          verbose: true # Show detailed Codecov action output
+      # 4. Run tests
+      # Запускаем обычные тесты, пока Coveralls недоступен
+      - name: Run tests # <-- Changed name back
+        run: npm run test # <-- Changed command back
 
 
-    # 5. (Optional) Build the project if tests depend on the build output
+      # 5. Upload coverage to Coveralls - Temporarily Disabled
+      # - name: Upload coverage reports to Coveralls
+      #   uses: coverallsapp/github-action@v2
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    # 6. (Optional) Build the project if tests depend on the build output
     # Uncomment if your tests require a prior build step
     # - name: Build project
     #   run: npm run build

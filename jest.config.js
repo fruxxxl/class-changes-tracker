@@ -7,10 +7,11 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['json', 'lcov', 'text'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/index.ts',
   ],
-  coverageReporters: ['json', 'lcov', 'text', 'clover'],
-  coverageDirectory: 'coverage',
 };
