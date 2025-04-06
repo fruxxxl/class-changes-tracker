@@ -1,2 +1,20 @@
 .qodo
 node_modules
+
+# NPM
+.npmrc
+npm-debug.log*
+*.tgz
+
+# Build output
+dist
+
+# Jest cache/reports
+coverage
+.jest-cache
+
+# IDE/OS files
+.idea
+.vscode
+*.iml
+*.DS_Store
