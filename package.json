@@ -1,24 +1,40 @@
 {
   "name": "class-changes-tracker",
   "version": "1.0.0",
-  "description": "A utility to track changes in class properties",
+  "description": "A lightweight TypeScript utility to track property changes in objects using snapshots, with configurable depth and custom type handling.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
     "typescript",
     "changes",
     "tracker",
-    "proxy"
+    "proxy",
+    "snapshot",
+    "diff",
+    "object",
+    "property"
   ],
-  "author": "",
+  "author": "AlexSh <fruxxx@yandex.ru> (https://github.com/fruxxxl)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fruxxxl/class-changes-tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fruxxxl/class-changes-tracker/issues"
+  },
+  "homepage": "https://github.com/fruxxxl/class-changes-tracker#readme",
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.16",
