@@ -2,7 +2,8 @@
 
 [![NPM Version](https://img.shields.io/npm/v/class-changes-tracker.svg)](https://www.npmjs.com/package/class-changes-tracker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml)
+[![Tests](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml)
+[![Coverage Status](https://codecov.io/gh/fruxxxl/class-changes-tracker/graph/badge.svg?token=ВАШ_CODECOV_TOKEN_ЕСЛИ_НУЖЕН)](https://codecov.io/gh/fruxxxl/class-changes-tracker)
 <!-- Add other badges if needed (e.g., build status, test coverage) -->
 
 A lightweight TypeScript utility to track property changes in objects using snapshots, with configurable depth and custom type handling.

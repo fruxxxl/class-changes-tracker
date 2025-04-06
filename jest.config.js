@@ -1,3 +1,4 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -6,4 +7,10 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/index.ts',
+  ],
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  coverageDirectory: 'coverage',
 };
