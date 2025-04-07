@@ -1,0 +1,48 @@
+# Workflow name
+name: Publish to NPM
+
+# Trigger: Run only on pushes to the master branch
+on:
+  push:
+    branches:
+      - master # Trigger only on pushes to master
+
+jobs:
+  # Job to build, test, and publish
+  build-test-publish:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      # Use actions/setup-node to handle Node.js setup and NPM authentication
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x" # Specify your desired Node.js version (e.g., LTS)
+          registry-url: "https://registry.npmjs.org/" # Point to the public NPM registry
+          cache: "npm" # Enable caching for npm dependencies
+
+      # 3. Install dependencies reliably
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build the project (optional but good practice before testing/publishing)
+      - name: Build project
+        run: npm run build
+
+      # 5. Run tests (publishing happens only if this step passes)
+      - name: Run tests
+        run: npm run test
+
+      # 6. Publish to NPM if tests passed
+      # This step automatically runs only if previous steps were successful
+      # It uses the NODE_AUTH_TOKEN environment variable set by setup-node
+      - name: Publish to NPM
+        run: npm publish --access public # Use '--access public' for unscoped public packages
+        env:
+          # Use the NPM token stored as a GitHub secret
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
