@@ -46,18 +46,5 @@ jobs:
         run: npm ci
 
       # 4. Run tests
-      # Run regular tests while Coveralls is unavailable
-      - name: Run tests # <-- Changed name back
-        run: npm run test # <-- Changed command back
-
-
-      # 5. Upload coverage to Coveralls - Temporarily Disabled
-      # - name: Upload coverage reports to Coveralls
-      #   uses: coverallsapp/github-action@v2
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-
-    # 6. (Optional) Build the project if tests depend on the build output
-    # Uncomment if your tests require a prior build step
-    # - name: Build project
-    #   run: npm run build
+      - name: Run tests
+        run: npm run test

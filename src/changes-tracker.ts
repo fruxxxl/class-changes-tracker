@@ -98,9 +98,6 @@ export class ChangesTracker {
       return true;
     }
 
-    // Other standard types like RegExp could be added here if needed universally.
-    // if (value instanceof RegExp) return true;
-
     return false; // It's a regular object or array that needs recursion
   }
 
@@ -389,7 +386,7 @@ export class ChangesTracker {
     }
     // If we reach here, it implies isEqual was true despite peekChanges saying otherwise,
     // or some path wasn't handled. Return empty array as no specific diff was found here.
-    return []; // Removed the else block, simplified the end
+    return []
   }
 
   /**
