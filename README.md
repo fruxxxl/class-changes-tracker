@@ -3,10 +3,8 @@
 [![NPM Version](https://img.shields.io/npm/v/class-changes-tracker.svg)](https://www.npmjs.com/package/class-changes-tracker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml)
-<!-- coverage-badge-start -->
-[![coverage](https://img.shields.io/badge/coverage-94%25-green)]() <!-- Updated coverage badge -->
-<!-- coverage-badge-end -->
-<!-- Add other badges if needed (e.g., build status, test coverage) -->
+[![codecov](https://codecov.io/gh/fruxxxl/class-changes-tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/fruxxxl/class-changes-tracker)
+
 
 A lightweight TypeScript utility to track property changes in objects using snapshots, with configurable depth and custom type handling.
 
@@ -22,7 +20,7 @@ A lightweight TypeScript utility to track property changes in objects using snap
     - [Handling Custom Types with `treatAsValue`](#handling-custom-types-with-treatasvalue)
     - [Stopping Tracking](#stopping-tracking)
   - [API Reference](#api-reference)
-    - [`new ClassChangesTracker(options?)`](#new-changestrackeroptions)
+    - [`new ClassChangesTracker(options?)`](#new-classchangestrackeroptions)
     - [`startTrack(obj, property, maxDepth?)`](#starttrackobj-property-maxdepth)
     - [`peekChanges()`](#peekchanges)
     - [`updateSnapshots()`](#updatesnapshots)
