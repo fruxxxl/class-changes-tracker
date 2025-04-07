@@ -1,4 +1,4 @@
-# Claxx Changes Tracker
+# Class Changes Tracker
 
 [![NPM Version](https://img.shields.io/npm/v/class-changes-tracker.svg)](https://www.npmjs.com/package/class-changes-tracker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,7 +12,7 @@ A lightweight TypeScript utility to track property changes in objects using snap
 
 ## Table of Contents
 
-- [Claxx Changes Tracker](#claxx-changes-tracker)
+- [Class Changes Tracker](#class-changes-tracker)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
