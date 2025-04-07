@@ -161,8 +161,6 @@ export class ChangesTracker {
       maxDepth: maxDepth,
     });
 
-    // Log removed: console.log(`ChangesTracker: Started tracking property '${propertyName}' via snapshot (maxDepth: ${maxDepth}).`);
-
     // Return the original value; no proxy is created.
     return currentValue;
   }
@@ -184,7 +182,6 @@ export class ChangesTracker {
 
       if (!parentObj) {
         this.trackedProperties.delete(propertyKey);
-        // Log removed: console.warn(...)
         continue;
       }
 
@@ -193,7 +190,6 @@ export class ChangesTracker {
       try {
         currentValue = parentObj[property];
       } catch (error) {
-        // Log removed: console.error(...)
         continue; // Skip diffing if value cannot be accessed
       }
 
@@ -237,7 +233,6 @@ export class ChangesTracker {
       try {
         currentValue = parentObj[property];
       } catch (error) {
-        // Log removed: console.error(...)
         continue; // Skip update if value cannot be accessed
       }
 
@@ -246,12 +241,10 @@ export class ChangesTracker {
         // Clone the current value for the new snapshot
         trackedInfo.originalValueSnapshot = cloneDeep(currentValue);
       } catch (cloneError) {
-        // Log removed: console.error(...)
         // If cloning fails, remove tracking to avoid inconsistent state
         this.trackedProperties.delete(propertyKey);
       }
     }
-     // Log removed: console.log(`ChangesTracker: Updated snapshots for all tracked properties.`);
   }
 
   /**
