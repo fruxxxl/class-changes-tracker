@@ -1,4 +1,4 @@
-import { ChangesTracker, TChange } from '../src/changes-tracker';
+import { ClassChangesTracker, TChange } from '../src/changes-tracker';
 import * as lodash from 'lodash';
 
 // Store the real implementations
@@ -77,8 +77,8 @@ const isCustomValueType = (value: any): boolean => {
 
 // --- Tests ---
 
-describe('ChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
-  let tracker: ChangesTracker;
+describe('ClassChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
+  let tracker: ClassChangesTracker;
   let user: IUser;
   let originalUser: IUser;
 
@@ -96,7 +96,7 @@ describe('ChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
   });
 
   beforeEach(() => {
-    tracker = new ChangesTracker({ treatAsValue: isCustomValueType });
+    tracker = new ClassChangesTracker({ treatAsValue: isCustomValueType });
     const testCustomId = new CustomId('abc-123');
     const testComplexData = new ComplexData('TestData', 42, new CustomId('nested-456'));
 
@@ -604,8 +604,8 @@ describe('ChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
   });
 
   // --- Test Suite for Behavior WITHOUT Custom Predicate ---
-  describe('ChangesTracker without custom value types', () => {
-    let trackerWithoutPredicate: ChangesTracker;
+  describe('ClassChangesTracker without custom value types', () => {
+    let trackerWithoutPredicate: ClassChangesTracker;
     let userForTest: IUser;
     let originalUserForTest: IUser; // Keep original for comparison
 
@@ -621,7 +621,7 @@ describe('ChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
     });
 
     beforeEach(() => {
-      trackerWithoutPredicate = new ChangesTracker();
+      trackerWithoutPredicate = new ClassChangesTracker();
       const testCustomId = new CustomId('test-id-1');
       const testComplexData = new ComplexData('CompData', 10);
       userForTest = {
@@ -705,8 +705,8 @@ describe('ChangesTracker (Snapshot with Depth Limit & Aggregation)', () => {
 
 });
 
-describe('ChangesTracker Error Handling and Edge Cases', () => {
-  let tracker: ChangesTracker;
+describe('ClassChangesTracker Error Handling and Edge Cases', () => {
+  let tracker: ClassChangesTracker;
 
   // Manage mock state for this suite
   afterEach(() => {
@@ -721,7 +721,7 @@ describe('ChangesTracker Error Handling and Edge Cases', () => {
     // Reset to real implementation before each test
     mockedLodash.cloneDeep.mockImplementation(actualLodash.cloneDeep);
     mockedLodash.isEqual.mockImplementation(actualLodash.isEqual);
-    tracker = new ChangesTracker();
+    tracker = new ClassChangesTracker();
   });
 
   it('should handle property access error during startTrack gracefully', () => {
@@ -862,15 +862,15 @@ describe('ChangesTracker Error Handling and Edge Cases', () => {
   });
 });
 
-describe('ChangesTracker stopTrack Edge Cases', () => {
-    let tracker: ChangesTracker;
+describe('ClassChangesTracker stopTrack Edge Cases', () => {
+    let tracker: ClassChangesTracker;
     let obj1: { id: number, name: string };
     let obj2: { id: number, name: string };
 
     beforeEach(() => {
         mockedLodash.cloneDeep.mockImplementation(actualLodash.cloneDeep);
         mockedLodash.isEqual.mockImplementation(actualLodash.isEqual);
-        tracker = new ChangesTracker();
+        tracker = new ClassChangesTracker();
         obj1 = { id: 1, name: 'Object One' };
         obj2 = { id: 2, name: 'Object Two' };
     });

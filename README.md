@@ -22,7 +22,7 @@ A lightweight TypeScript utility to track property changes in objects using snap
     - [Handling Custom Types with `treatAsValue`](#handling-custom-types-with-treatasvalue)
     - [Stopping Tracking](#stopping-tracking)
   - [API Reference](#api-reference)
-    - [`new ChangesTracker(options?)`](#new-changestrackeroptions)
+    - [`new ClassChangesTracker(options?)`](#new-changestrackeroptions)
     - [`startTrack(obj, property, maxDepth?)`](#starttrackobj-property-maxdepth)
     - [`peekChanges()`](#peekchanges)
     - [`updateSnapshots()`](#updatesnapshots)
@@ -57,7 +57,7 @@ yarn add class-changes-tracker
 ### Basic Tracking
 
 ```typescript
-import { ChangesTracker, type TChange } from 'class-changes-tracker';
+import { ClassChangesTracker, type TChange } from 'class-changes-tracker';
 
 // --- Setup ---
 interface IAddress {
@@ -71,7 +71,7 @@ interface IUser {
   tags: string[];
 }
 
-const tracker = new ChangesTracker();
+const tracker = new ClassChangesTracker();
 
 const user: IUser = {
   id: 1,
@@ -131,9 +131,9 @@ tracker.updateSnapshots();
 Control how deep the tracker looks for changes within an object. Changes below `maxDepth` are aggregated at the `maxDepth` level.
 
 ```typescript
-import { ChangesTracker, type TChange } from 'class-changes-tracker';
+import { ClassChangesTracker, type TChange } from 'class-changes-tracker';
 
-const depthTracker = new ChangesTracker();
+const depthTracker = new ClassChangesTracker();
 const deepUser = { data: { level1: { level2: { level3: 'value' } } } };
 
 // Start tracking 'data' with maxDepth = 2
@@ -162,7 +162,7 @@ Output:
 Prevent the tracker from recursing into specific object types (like class instances) and compare them by value instead.
 
 ```typescript
-import { ChangesTracker, type TChange } from 'class-changes-tracker';
+import { ClassChangesTracker, type TChange } from 'class-changes-tracker';
 
 // Example custom class
 class CustomId {
@@ -173,7 +173,7 @@ class CustomId {
 }
 
 // Configure tracker to treat CustomId as an atomic value
-const customTypeTracker = new ChangesTracker({
+const customTypeTracker = new ClassChangesTracker({
   treatAsValue: (value) => value instanceof CustomId,
 });
 
@@ -208,9 +208,9 @@ Output:
 You can stop tracking individual properties or all properties managed by a tracker instance.
 
 ```typescript
-import { ChangesTracker } from 'class-changes-tracker';
+import { ClassChangesTracker } from 'class-changes-tracker';
 
-const tracker = new ChangesTracker();
+const tracker = new ClassChangesTracker();
 const user = { name: 'Temp User', id: 99 };
 
 tracker.startTrack(user, 'name');
@@ -230,9 +230,9 @@ console.log('Changes after stopping:', changes); // Output: []
 
 ## API Reference
 
-### `new ChangesTracker(options?)`
+### `new ClassChangesTracker(options?)`
 
-Creates a new `ChangesTracker` instance.
+Creates a new `ClassChangesTracker` instance.
 
 *   **`options`** (optional): `object`
     *   **`treatAsValue`**: `(value: any) => boolean` (optional) - A predicate function. If it returns `true` for a given value, the tracker will compare that value using `lodash.isEqual` instead of recursing into its properties. Defaults to only treating primitives and `Date` instances this way.
@@ -269,7 +269,7 @@ Stops tracking changes for a specific property on a specific object.
 
 ### `stopAllTracks()`
 
-Stops tracking changes for all properties currently being monitored by this `ChangesTracker` instance. Clears all stored snapshots and tracking information.
+Stops tracking changes for all properties currently being monitored by this `ClassChangesTracker` instance. Clears all stored snapshots and tracking information.
 
 *   **Returns**: `void`
 

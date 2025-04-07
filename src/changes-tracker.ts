@@ -36,7 +36,7 @@ interface ITrackedPropertyInfo {
 }
 
 /**
- * Options for configuring the ChangesTracker.
+ * Options for configuring the ClassChangesTracker.
  */
 interface IChangesTrackerOptions {
   /**
@@ -64,7 +64,7 @@ interface IChangesTrackerOptions {
  * Structural changes (like adding/removing array elements or object keys) are typically
  * reported as a single, aggregated change on the parent structure.
  */
-export class ChangesTracker {
+export class ClassChangesTracker {
   /** Map storing information about tracked properties. Key is a namespaced property identifier. */
   private trackedProperties: Map<string, ITrackedPropertyInfo> = new Map();
   /** Default maximum depth for detailing changes if not specified in `startTrack`. */
@@ -73,7 +73,7 @@ export class ChangesTracker {
   private readonly treatAsValue: (value: any) => boolean;
 
   /**
-   * Creates an instance of ChangesTracker.
+   * Creates an instance of ClassChangesTracker.
    * @param options - Optional configuration for the tracker.
    */
   constructor(options?: IChangesTrackerOptions) {
@@ -136,7 +136,7 @@ export class ChangesTracker {
       initialValueSnapshot = cloneDeep(initialValue);
     } catch (error) {
       // If accessing or cloning the initial value fails, log the error and do not track.
-      // console.error(`ChangesTracker: Failed to create initial snapshot for '${propertyKey}'. Property not tracked. Error: ${error}`);
+      // console.error(`ClassChangesTracker: Failed to create initial snapshot for '${propertyKey}'. Property not tracked. Error: ${error}`);
       // Optionally re-throw or handle differently based on desired behavior
       return undefined; // Indicate failure / property not tracked
     }
