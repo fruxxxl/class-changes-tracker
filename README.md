@@ -3,7 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/class-changes-tracker.svg)](https://www.npmjs.com/package/class-changes-tracker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml)
-<!-- [![Coverage Status](https://coveralls.io/repos/github/fruxxxl/class-changes-tracker/badge.svg?branch=master)](https://coveralls.io/github/fruxxxl/class-changes-tracker?branch=master) --> <!-- Временно отключено из-за недоступности Coveralls -->
+<!-- [![Coverage Status](https://coveralls.io/repos/github/fruxxxl/class-changes-tracker/badge.svg?branch=master)](https://coveralls.io/github/fruxxxl/class-changes-tracker?branch=master) --> <!-- Temporarily disabled due to Coveralls unavailability -->
 <!-- Add other badges if needed (e.g., build status, test coverage) -->
 
 A lightweight TypeScript utility to track property changes in objects using snapshots, with configurable depth and custom type handling.

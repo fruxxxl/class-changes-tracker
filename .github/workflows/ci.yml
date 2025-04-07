@@ -46,7 +46,7 @@ jobs:
         run: npm ci
 
       # 4. Run tests
-      # Запускаем обычные тесты, пока Coveralls недоступен
+      # Run regular tests while Coveralls is unavailable
       - name: Run tests # <-- Changed name back
         run: npm run test # <-- Changed command back
 

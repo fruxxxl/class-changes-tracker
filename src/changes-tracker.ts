@@ -126,43 +126,34 @@ export class ChangesTracker {
     obj: T,
     property: K,
     maxDepth: number = this.defaultMaxDepth,
-  ): T[K] {
+  ): T[K] | undefined {
     const propertyName = String(property);
-    // Use a unique key including the constructor name to avoid collisions
-    // for same-named properties on different object types.
     const propertyKey = `${obj.constructor.name}.${propertyName}`;
-    const currentValue = obj[property];
 
-    // If already tracking this exact object/property, remove the old entry first
-    // to ensure the new maxDepth and snapshot are used.
-    const existingInfo = this.trackedProperties.get(propertyKey);
-    if (existingInfo?.parentObjRef.deref() === obj) {
-        this.trackedProperties.delete(propertyKey);
-    }
-    // Handle cases where the key exists but the object is different (stale WeakRef cleared)
-    else if (this.trackedProperties.has(propertyKey)) {
-         this.trackedProperties.delete(propertyKey);
-    }
+    let initialValue: T[K] | undefined;
+    let initialValueSnapshot: any;
 
-    let originalValueSnapshot: any;
     try {
-      // Always create a deep copy for the snapshot.
-      originalValueSnapshot = cloneDeep(currentValue);
+      // Access the property and attempt to clone its initial value
+      initialValue = obj[property];
+      initialValueSnapshot = cloneDeep(initialValue);
     } catch (error) {
-      // Consider adding more robust error handling or logging if needed
-      return currentValue; // Return original value; tracking won't start.
+      // If accessing or cloning the initial value fails, log the error and do not track.
+      // console.error(`ChangesTracker: Failed to create initial snapshot for '${propertyKey}'. Property not tracked. Error: ${error}`);
+      // Optionally re-throw or handle differently based on desired behavior
+      return undefined; // Indicate failure / property not tracked
     }
 
-    // Store tracking information.
+    // If successful, store tracking info
     this.trackedProperties.set(propertyKey, {
       parentObjRef: new WeakRef(obj),
-      property: property,
-      originalValueSnapshot: originalValueSnapshot,
+      property: propertyName, // Store as string/symbol/number
+      originalValueSnapshot: initialValueSnapshot,
       maxDepth: maxDepth,
     });
 
-    // Return the original value; no proxy is created.
-    return currentValue;
+    // Return the original value (if successfully accessed); no proxy is created.
+    return initialValue;
   }
 
   /**
@@ -181,7 +172,9 @@ export class ChangesTracker {
       const parentObj = trackedInfo.parentObjRef.deref();
 
       if (!parentObj) {
+        /* istanbul ignore next */ // Hard to reliably test GC scenarios
         this.trackedProperties.delete(propertyKey);
+        /* istanbul ignore next */ // Hard to reliably test GC scenarios
         continue;
       }
 
@@ -385,7 +378,7 @@ export class ChangesTracker {
     // This case is reached if types are different (e.g., array vs object)
     // or other unexpected scenarios. Since peekChanges() already confirmed
     // !isEqual(originalSnapshot, currentValue), we report a change here.
-    if (!isEqual(oldValue, newValue)) { // Final check for safety
+    if (!isEqual(oldValue, newValue)) { // Final check
        return [
          {
            path: currentPath,
@@ -393,10 +386,10 @@ export class ChangesTracker {
            newValue: cloneDeep(newValue), // Clone newValue here
          },
        ];
-    } else {
-       // Should theoretically not be reached if peekChanges check worked, but included for safety.
-       return [];
     }
+    // If we reach here, it implies isEqual was true despite peekChanges saying otherwise,
+    // or some path wasn't handled. Return empty array as no specific diff was found here.
+    return []; // Removed the else block, simplified the end
   }
 
   /**
