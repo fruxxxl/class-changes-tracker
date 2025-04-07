@@ -1,6 +1,6 @@
-# Contributing to Class Changes Tracker
+# Contributing to Class Claxx Changes Tracker
 
-First off, thank you for considering contributing to Class Changes Tracker. It's people like you that make Class Changes Tracker such a great tool.
+First off, thank you for considering contributing to Class Claxx Changes Tracker. It's people like you that make Class Claxx Changes Tracker such a great tool.
 
 ## Getting Started
 
@@ -22,4 +22,4 @@ Before you begin, ensure you have a local copy of the project. Fork the reposito
 
 If you have any questions or need further clarification, feel free to ask in the issue comments or reach out to one of the maintainers directly.
 
-Thank you for contributing to Class Changes Tracker. We look forward to your contribution!
+Thank you for contributing to Class Claxx Changes Tracker. We look forward to your contribution!
