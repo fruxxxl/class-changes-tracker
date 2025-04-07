@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/fruxxxl/class-changes-tracker/actions/workflows/ci.yml)
 <!-- coverage-badge-start -->
-[![coverage](https://img.shields.io/badge/coverage-unknown-lightgrey)]() <!-- Default/placeholder badge -->
+[![coverage](https://img.shields.io/badge/coverage-94%25-green)]() <!-- Updated coverage badge -->
 <!-- coverage-badge-end -->
 <!-- Add other badges if needed (e.g., build status, test coverage) -->
 
