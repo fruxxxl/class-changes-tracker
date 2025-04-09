@@ -36,6 +36,7 @@ A lightweight TypeScript utility to track property changes in objects using snap
 *   **Custom Type Handling:** Define types (`treatAsValue`) that should be compared by value (e.g., `ObjectId`, `Date`, custom classes) instead of deep comparison.
 *   **Detailed Change Reports:** Provides clear `TChange[]` reports including path, old value, and new value.
 *   **Memory Efficient:** Uses `WeakRef` to avoid memory leaks by allowing tracked objects to be garbage collected.
+*   **Node.js Compatibility:** Requires Node.js version 14 or higher due to the use of `WeakRef`.
 *   **TypeScript Native:** Written entirely in TypeScript with included type definitions.
 
 ## Installation
